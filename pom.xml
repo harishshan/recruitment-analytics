@@ -34,7 +34,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.solr</groupId>
-			<artifactId>solr-solrj</artifactId>
+			<artifactId>solr-core</artifactId>
 			<version>6.3.0</version>
 		</dependency>
 		<dependency>
