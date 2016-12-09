@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+	<bean id="loginDAO" class="com.winterhack.altimetrik.dao.LoginDAO">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="gson" class="com.google.gson.Gson">
+	</bean>
+	<bean id="jsonUtil" class="com.winterhack.altimetrik.util.JsonUtil">
+		<property name="gson" ref="gson"></property>
+	</bean>
+</beans>
