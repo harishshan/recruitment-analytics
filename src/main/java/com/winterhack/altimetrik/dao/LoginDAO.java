@@ -11,39 +11,38 @@ import org.slf4j.LoggerFactory;
 
 import com.winterhack.altimetrik.entity.Login;
 
-public class LoginDAO{
+public class LoginDAO {
 
-	private SessionFactory sessionFactory;
-	
-	private final Logger logger = LoggerFactory.getLogger(LoginDAO.class);
-	
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
+    private SessionFactory sessionFactory;
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+    private final Logger logger = LoggerFactory.getLogger(LoginDAO.class);
 
-	public Login findByUsernameAndPassword(Login login) {
-		Session session = null;
-		try{
-			logger.info("LoginDAO findByUsernameAndPassword method");
-			session = this.sessionFactory.openSession();
-			Criteria criteria = session.createCriteria(Login.class);
-			criteria.add(Restrictions.eq("username", login.getUsername()));
-			criteria.add(Restrictions.eq("password", login.getPassword()));
-			List<Login> loginList=criteria.list();
-			return loginList.get(0);
-		}catch(Exception ex){
-			//logger.error(ex.toString(),ex);
-			return null;
-		}finally{
-			if(session!=null && (session.isConnected() || session.isOpen())){
-				session.close();
-			}
-		}
-	}
-	
-	
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public Login findByUsernameAndPassword(Login login) {
+        Session session = null;
+        try {
+            logger.info("LoginDAO findByUsernameAndPassword method");
+            session = this.sessionFactory.openSession();
+            Criteria criteria = session.createCriteria(Login.class);
+            criteria.add(Restrictions.eq("username", login.getUsername()));
+            criteria.add(Restrictions.eq("password", login.getPassword()));
+            List<Login> loginList = criteria.list();
+            return loginList.get(0);
+        } catch (Exception ex) {
+            // logger.error(ex.toString(),ex);
+            return null;
+        } finally {
+            if (session != null && (session.isConnected() || session.isOpen())) {
+                session.close();
+            }
+        }
+    }
+
 }
