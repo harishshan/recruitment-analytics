@@ -27,16 +27,36 @@ public class SolrDocumentManager {
     private SolrClient solr;
 
     public SolrDocumentManager(String hostname) {
-        solr = new HttpSolrClient.Builder("http://"+hostname+":8983/solr/recrutement").build();
+        solr = new HttpSolrClient.Builder("http://" + hostname + ":8983/solr/recrutement").build();
     }
+
     public SolrDocumentManager() {
         solr = new HttpSolrClient.Builder("http://localhost:8983/solr/recrutement").build();
     }
 
     public List<DocumentTO> getDataFromSolr() throws SolrServerException, IOException {
+        return getDataFromSolrViaSearch("q", "*:*");
+    }
+
+    public List<DocumentTO> getDataFromSolrUsingAnalyticsKey(String queryString)
+            throws SolrServerException, IOException {
+        return getDataFromSolrViaSearch("q", "analyticsKey:" + queryString);
+    }
+
+    public List<DocumentTO> getDataFromSolrUsingSearch(String field, String queryString)
+            throws SolrServerException, IOException {
+        if (field.equalsIgnoreCase("status")) {
+            return getDataFromSolrViaSearch("q", "status:" + queryString);
+        } else {
+            return getDataFromSolrViaSearch("q", "content:" + queryString);
+        }
+    }
+
+    public List<DocumentTO> getDataFromSolrViaSearch(String field, String queryString)
+            throws SolrServerException, IOException {
         List<DocumentTO> documentTOs = new ArrayList<DocumentTO>();
         SolrQuery query = new SolrQuery();
-        query.set("q", "*:*");
+        query.set(field, queryString);
         QueryResponse response = solr.query(query);
         SolrDocumentList list = response.getResults();
         list.size();
@@ -76,11 +96,7 @@ public class SolrDocumentManager {
             documentTOs.add(documentTO);
         }
         return documentTOs;
-    }
 
-    public static void main(String[] args) throws Exception {
-        SolrDocumentManager documentManager = new SolrDocumentManager();
-        documentManager.getDataFromSolr();
     }
 
     public void index(String emailId, String fileLocation)
