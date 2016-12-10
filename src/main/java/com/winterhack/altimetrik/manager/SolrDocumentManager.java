@@ -48,8 +48,13 @@ public class SolrDocumentManager {
         if (field.equalsIgnoreCase("status")) {
             return getDataFromSolrViaSearch("q", "status:" + queryString);
         } else {
-            return getDataFromSolrViaSearch("q", "content:" + queryString);
+            return getDataFromSolrViaSearch("q", "content:" + "*" + queryString + "*");
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        SolrDocumentManager documentManager = new SolrDocumentManager();
+        documentManager.getDataFromSolrUsingAnalyticsKey("3");
     }
 
     public List<DocumentTO> getDataFromSolrViaSearch(String field, String queryString)

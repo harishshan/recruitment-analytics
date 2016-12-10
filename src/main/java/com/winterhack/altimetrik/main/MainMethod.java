@@ -10,11 +10,11 @@ public class MainMethod {
     public static void main(String[] args) throws Exception {
         SolrClient solr = new HttpSolrClient.Builder("http://localhost:8983/solr/recrutement").build();
         SolrInputDocument document = new SolrInputDocument();
-        document.addField("analyticsKey", "8");
-        document.addField("emailId", "arulmanivel11@gmail.com");
-        document.addField("name", "Arulmani M");
-        document.addField("fileName", "MArulmani[4_6] (2).doc");
-        document.addField("phoneNumber", "91-8870883030");
+        document.addField("analyticsKey", "9");
+        document.addField("emailId", "lekhathakur2007@gmail.com");
+        document.addField("name", "LEKHA");
+        document.addField("fileName", "Lekha2_8 (3)[1].pdf");
+        document.addField("phoneNumber", "8802767982");
         document.addField("status", "new");
         TikaExtractorManager extractorManager = new TikaExtractorManager();
         String content = extractorManager
