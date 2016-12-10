@@ -9,8 +9,24 @@
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
         <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js">
-        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+		<script>
+	         var mainApp = angular.module("mainApp", []);
+	         
+	         mainApp.controller('ViewDocumentsController', function($scope, $http) {
+	        	var url = "getDocuments";
+        		$http.get(url).success( function(response) {
+        			$scope.documList = response; 
+        		});
+        		$scope.search = function(){
+        			var url = "searchDocument?filter="+$scope.filter+"&filtervalue="+$scope.filtervalue;
+        			$http.get(url).success( function(response) {
+            			$scope.documList = response; 
+            		});        			
+        		}
+	         });
+			
+      </script>
     </head>
     <body>
         <div class="container">
@@ -22,29 +38,54 @@
                     <h3 class="panel-title">Home</h3>
                 </div>
                 <div class="panel-body">
-                    <form action="login" method="post">
-                        <div class="form-group">
-                            <label>
-                                hai
-                            </label>
-                            <input type="text" class="form-control" id="username" placeholder="Username">
-                        </div>
-                        <div class="form-group">
-                            <label>
-                                Password
-                            </label>
-                            <input type="text" class="form-control" id="password" placeholder="password">
-                        </div>                    
-                        
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success">
-                                Submit
-                            </button>
-                            <button type="submit" class="btn btn-danger">
-                                Clear
-                            </button>
-                        </div>
-                    </form>
+                	<div ng-app="mainApp"  ng-controller="ViewDocumentsController">
+                    	<div class="table-responsive">
+                    		<table>
+                    			<tbody>
+                    				<tr>
+                    					<td>                    						                   						
+	                    					<select ng-model="filter">
+	                    						<option value="qualification">Qualification</option>
+	                    						<option value="skillset">Skillset</option>
+	                    						<option value="designation">Designation</option>
+	                    						<option value="company">company</option>
+	                    						<option value="status">Status</option>
+	                    						<option value="round">Round</option>
+	                    					</select>
+	                    				</td>	                    				                  				
+                    					<td>
+                    						&#160;&#160;&#160;&#160;&#160;<input type="text" class="form-control" id="filtervalue" placeholder="" name="filtervalue" ng-model = "filtervalue">
+                    					</td>   
+                    					<td>
+                    						<button ng-click = "search()">Search</button>	
+                    					</td>        					
+                    				</tr>
+                    			</tbody>
+                    		</table>								
+								
+							</div>
+                        	<table class="table table-hover table-bordered" >
+                            	<thead>
+                            	<tr>	
+                               		<th>#</th>
+                               		<th>Name</th>                                    		
+                               		<th>EmailId</th>
+                               		<th>Status</th>
+                               		<th>Download File</th>                                    
+                            	</tr>
+                            	</thead>
+								<tbody>
+									<tr ng-repeat = "docum in documList" >
+                            			<th scope="row">{{docum.index}}</th>
+                            			<td>{{docum.name}}</td>
+										<td>{{docum.emailid}}</td>
+										<td>{{docum.status}}</td>
+										<td><a href="downloadFile/{{docum.filename}}">Click Here</a></td>
+                            		</tr>
+								<tbody>
+							</table>
+						</div>
+                    </div>
                 </div>
             </div>
         </div>

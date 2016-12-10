@@ -24,6 +24,9 @@ public class SolrDocumentManager {
 
     private SolrClient solr;
 
+    public SolrDocumentManager(String hostname) {
+        solr = new HttpSolrClient.Builder("http://"+hostname+":8983/solr/recrutement").build();
+    }
     public SolrDocumentManager() {
         solr = new HttpSolrClient.Builder("http://localhost:8983/solr/recrutement").build();
     }

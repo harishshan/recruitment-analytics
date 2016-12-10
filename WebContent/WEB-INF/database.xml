@@ -27,7 +27,9 @@
 		</property>
 		<property name="annotatedClasses">
 			<list>
-				<value>com.winterhack.altimetrik.entity.Login</value>	
+				<value>com.winterhack.altimetrik.entity.Login</value>
+				<value>com.winterhack.altimetrik.entity.Role</value>
+				<value>com.winterhack.altimetrik.entity.Property</value>	
 			</list>
 		</property>
 	</bean>

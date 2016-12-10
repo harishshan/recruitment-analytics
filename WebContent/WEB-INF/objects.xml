@@ -6,10 +6,18 @@
 	<bean id="loginDAO" class="com.winterhack.altimetrik.dao.LoginDAO">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="propertyDAO" class="com.winterhack.altimetrik.dao.PropertyDAO">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 
 	<bean id="gson" class="com.google.gson.Gson">
 	</bean>
 	<bean id="jsonUtil" class="com.winterhack.altimetrik.util.JsonUtil">
 		<property name="gson" ref="gson"></property>
+	</bean>
+	<bean id="cryptUtil" class="com.winterhack.altimetrik.util.CryptUtil">
+	</bean>
+	<bean id="solrDocumentManager" class="com.winterhack.altimetrik.manager.SolrDocumentManager">
+		<constructor-arg value="${solr.hostname}"/>
 	</bean>
 </beans>
