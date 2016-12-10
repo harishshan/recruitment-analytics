@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Admin Home</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js">
+        </script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-route.min.js"></script>
+<script>
+	         var mainApp = angular.module("mainApp", ['ngRoute']);
+	         mainApp.config(['$routeProvider', function($routeProvider) {
+	            $routeProvider.
+	            
+	            when('/systemProperties', {
+	               templateUrl: 'systemProperties.htm',
+	               controller: 'SystemPropertiesController'
+	            }).
+	            
+	            when('/viewUser', {
+	               templateUrl: 'viewUser.htm',
+	               controller: 'ViewUserController'
+	            }).
+	            
+	            when('/createUser', {
+		               templateUrl: 'createUser.htm',
+		               controller: 'CreateUserController'
+		           }).
+	            
+	            
+	            otherwise({
+	               redirectTo: '/systemProperties'
+	            });
+	         }]);
+	         
+	         mainApp.controller('SystemPropertiesController', function($scope,$http) {
+	        	 var url = "getProperties";
+	        		$http.get(url).success( function(response) {
+	        			$scope.propertiesList = response; 
+	        		});
+	         });
+	         
+	         mainApp.controller('ViewUserController', function($scope, $http) {
+	        	var url = "getUsers";
+        		$http.get(url).success( function(response) {
+        			$scope.userList = response; 
+        		});
+	         });
+	         mainApp.controller('CreateUserController', function($scope) {
+		        $scope.message = "This page will be used to display create new user";
+		     });
+			
+      </script>
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+			<h1>Admin Home</h1>
+		</div>
+		<div class="form-group">
+			<a href="#systemProperties">System Properties</a> <a href="#viewUser">View	User</a> <a href="#createUser">Create User</a>
+			<div ng-app="mainApp">
+				<div class="panel panel-default">
+					<div ng-view></div>
+					<script type="text/ng-template" id="systemProperties.htm">
+						<div>
+           					<div class="panel-heading">
+								<h3 class="panel-title">System Properties</h3>
+							</div>
+							<div class="panel-body">
+            					<form action="updateProperties" method="post">
+									<table class="table table-hover table-bordered">
+                            			<thead>
+                                		<tr>	
+                                    		<th>#</th>
+                                    		<th>Property Name</th>                                    		
+                                    		<th>Property Value</th>                          
+                                		</tr>
+                            			</thead>
+										<tbody>
+											<tr ng-repeat = "property in propertiesList"><div class="form-group">
+												<td><label> {{property.index}} </label></td>
+												<td><label> {{property.name}} </label></td>
+												<td><input type="text" class="form-control" id="{{property.name}}" placeholder="{{property.name}}" name="{{property.name}}" value="{{property.value}}"></td>
+											</div></tr>
+										</tbody>
+									</table>									
+									<div class="form-group">
+										<button type="submit" class="btn btn-success">Submit</button>
+										<button type="submit" class="btn btn-danger">Clear</button>
+									</div>
+								</form>
+							</div>
+						</div>
+         			</script>
+					<script type="text/ng-template" id="viewUser.htm">
+						<div>
+            				<div class="panel-heading">
+								<h3 class="panel-title">View User</h3>
+							</div>
+            				<div class="panel-body">
+	            				<div class="table-responsive">
+                        			<table class="table table-hover table-bordered">
+                            			<thead>
+                                		<tr>	
+                                    		<th>#</th>
+                                    		<th>Username</th>                                    		
+                                    		<th>EmailID</th>
+                                    		<th>Role</th>                                    
+                                		</tr>
+                            			</thead>
+										<tbody>
+											<tr ng-repeat = "user in userList">
+                                   	 			<th scope="row">{{user.index}}</th>
+                                    			<td>{{user.username}}</td>
+												<td>{{user.emailid}}</td>
+												<td>{{user.role}}</td>
+                                			</tr>
+										<tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+         			</script>
+					<script type="text/ng-template" id="createUser.htm">
+						<div>
+            				<div class="panel-heading">
+								<h3 class="panel-title">Create User</h3>
+							</div>	
+            				<div class="panel-body">
+            					<form action="createUser" method="post">
+									<div class="form-group">
+										<label> Username </label>
+										<input type="text" class="form-control" id="username" placeholder="Username" name="username">
+									</div>
+									<div class="form-group">
+										<label> Password </label>
+										<input type="password" class="form-control" id="password" placeholder="password" name="password">
+									</div>
+									<div class="form-group">
+										<label> EmailId </label>
+										<input type="text" class="form-control" id="emailid" placeholder="Email-ID" name="emailid">
+									</div>
+									<div class="form-group">
+                            			<label for="rolename">
+                                			Role &#160;&#160;&#160;&#160;&#160;
+                            			</label>
+                            			<label class="radio-inline">
+                                			<input checked="true" type="radio" name="rolename" id="role1" value="Recruiter">Recruiter
+                            			</label>
+                            			<label class="radio-inline">
+                                			<input type="radio" name="rolename" id="role2" value="Employee">Employee
+                            			</label>
+                            			<label class="radio-inline">
+                                			<input type="radio" name="rolename" id="role3" value="Accountant">Accountant
+                            			</label>
+                        			</div>
+									<div class="form-group">
+										<button type="submit" class="btn btn-success">Submit</button>
+										<button type="submit" class="btn btn-danger">Clear</button>
+									</div>
+								</form>
+							</div>	
+						</div>
+         			</script>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+</body>
+</html>
