@@ -8,41 +8,40 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Property")
+@Table(name = "Property")
 public class Property {
-	@Id
-    @Column(name="id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-	
-	@Column(name="name")
-	private String name;
-	
-	@Column(name="value")
-	private String value;
-	
-	public int getId() {
-		return id;
-	}
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    @Column(name = "name")
+    private String name;
 
-	public String getName() {
-		return name;
-	}
+    @Column(name = "value")
+    private String value;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getValue() {
-		return value;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setValue(String value) {
-		this.value = value;
-	}
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 }
-

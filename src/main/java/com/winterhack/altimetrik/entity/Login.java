@@ -10,65 +10,64 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="Login")
+@Table(name = "Login")
 public class Login {
-	@Id
-    @Column(name="id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-	
-	@Column(name="username")
-	private String username;
-	
-	@Column(name="password")
-	private String password;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	@Column(name="emailId")
-	private String emailId;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "emailId")
+    private String emailId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "roleid", nullable = false)
-	private Role role;
-	
-	public int getId() {
-		return id;
-	}
+    private Role role;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getEmailId() {
-		return emailId;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
-	}
+    public String getEmailId() {
+        return emailId;
+    }
 
-	public Role getRole() {
-		return role;
-	}
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

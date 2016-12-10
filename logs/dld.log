@@ -1,0 +1,9 @@
+[WARN ] 2016-12-10-06-40-29-653 [main] org.apache.pdfbox.pdmodel.font.FileSystemFontProvider 444- New fonts found, font cache will be re-built
+[WARN ] 2016-12-10-06-40-29-656 [main] org.apache.pdfbox.pdmodel.font.FileSystemFontProvider 224- Building on-disk font cache, this may take a while
+[WARN ] 2016-12-10-06-40-52-277 [main] org.apache.pdfbox.pdmodel.font.FileSystemFontProvider 227- Finished building on-disk font cache, found 656 fonts
+[WARN ] 2016-12-10-06-40-53-173 [main] org.apache.pdfbox.pdmodel.font.PDSimpleFont 104- Unknown encoding: SymbolSetEncoding
+[WARN ] 2016-12-10-06-45-38-548 [main] org.apache.pdfbox.pdmodel.font.PDSimpleFont 104- Unknown encoding: SymbolSetEncoding
+[WARN ] 2016-12-10-06-47-32-606 [main] org.apache.pdfbox.pdmodel.font.PDSimpleFont 104- Unknown encoding: SymbolSetEncoding
+[WARN ] 2016-12-10-06-48-46-164 [main] org.apache.pdfbox.pdmodel.font.PDSimpleFont 104- Unknown encoding: SymbolSetEncoding
+[WARN ] 2016-12-10-06-50-35-031 [main] org.apache.pdfbox.pdmodel.font.PDSimpleFont 104- Unknown encoding: SymbolSetEncoding
+[WARN ] 2016-12-10-06-51-33-508 [main] org.apache.pdfbox.pdmodel.font.PDSimpleFont 104- Unknown encoding: SymbolSetEncoding

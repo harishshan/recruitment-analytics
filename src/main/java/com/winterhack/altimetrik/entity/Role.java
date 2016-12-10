@@ -8,31 +8,29 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Role")
+@Table(name = "Role")
 public class Role {
-	@Id
-    @Column(name="id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-	
-	@Column(name="rolename")
-	private String rolename;
-	
-	
-	public int getId() {
-		return id;
-	}
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    @Column(name = "rolename")
+    private String rolename;
 
-	public String getRolename() {
-		return rolename;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setRolename(String rolename) {
-		this.rolename = rolename;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getRolename() {
+        return rolename;
+    }
+
+    public void setRolename(String rolename) {
+        this.rolename = rolename;
+    }
 }
-

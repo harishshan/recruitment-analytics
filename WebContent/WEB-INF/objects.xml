@@ -6,7 +6,7 @@
 	<bean id="loginDAO" class="com.winterhack.altimetrik.dao.LoginDAO">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	
+
 	<bean id="gson" class="com.google.gson.Gson">
 	</bean>
 	<bean id="jsonUtil" class="com.winterhack.altimetrik.util.JsonUtil">

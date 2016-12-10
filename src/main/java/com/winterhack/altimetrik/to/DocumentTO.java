@@ -20,6 +20,8 @@ public class DocumentTO implements Serializable {
 
     private List<RoundTO> roundTO;
 
+    private String content;
+
     public String getAnalyticsKey() {
         return analyticsKey;
     }
@@ -78,4 +80,11 @@ public class DocumentTO implements Serializable {
         this.roundTO.add(roundTO);
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }
