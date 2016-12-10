@@ -29,7 +29,8 @@
 			<list>
 				<value>com.winterhack.altimetrik.entity.Login</value>
 				<value>com.winterhack.altimetrik.entity.Role</value>
-				<value>com.winterhack.altimetrik.entity.Property</value>	
+				<value>com.winterhack.altimetrik.entity.Property</value>
+				<value>com.winterhack.altimetrik.entity.Round</value>	
 			</list>
 		</property>
 	</bean>

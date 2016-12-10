@@ -9,6 +9,9 @@
 	<bean id="propertyDAO" class="com.winterhack.altimetrik.dao.PropertyDAO">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="roundDAO" class="com.winterhack.altimetrik.dao.RoundDAO">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 
 	<bean id="gson" class="com.google.gson.Gson">
 	</bean>

@@ -3,7 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <title>Scheudled Successfully</title>
+        <title>Interview</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -12,19 +12,46 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
-        
+        <script>
+	         var mainApp = angular.module("mainApp", []);
+	         
+	         mainApp.controller('ViewDocumentsController', function($scope, $http) {
+	        	var url = "getDocuments";
+        		$http.get(url).success( function(response) {
+        			$scope.documList = response; 
+        		});
+        		$scope.search = function(){
+        			var url = "searchDocument?filter="+$scope.filter+"&filtervalue="+$scope.filtervalue;
+        			$http.get(url).success( function(response) {
+            			$scope.documList = response; 
+            		});        			
+        		}
+	         });
+			
+      </script>
     </head>
     <body>
         <div class="container">
             <div class="page-header">
-                <h1>Scheudled Successfully</h1>
+                <h1>Interview</h1>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Scheudled Successfully</h3>
+                    <h3 class="panel-title">Candiant details</h3>
                 </div>
                 <div class="panel-body">
-                </div>	
+                	<div ng-app="mainApp"  ng-controller="ViewDocumentsController">
+                    	<div class="table-responsive">
+                    		<table>
+                    			<tbody>
+                    				<tr>
+                    					 <td>Name</td>
+                    					 <tr><>
+                    				</tr>
+							</table>
+						</div>
+                    </div>
+                </div>
             </div>
         </div>       
 </body>

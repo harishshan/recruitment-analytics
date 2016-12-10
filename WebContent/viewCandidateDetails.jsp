@@ -17,7 +17,7 @@
 	         var mainApp = angular.module("mainApp", []);
 	         
 	         mainApp.controller('viewCandidateDetailsController', function($scope, $http) {
-	        	var url = "getCandidateDetails/"+<%=request.getParameter("analysticsKey") %>+"";
+	        	var url = "getCandidateDetails/"+<%=request.getParameter("analysticskey") %>+"";
         		$http.get(url).success( function(response) {
         			$scope.candidate = response; 
         		});        		
@@ -25,7 +25,7 @@
 			
       </script>
     </head>
-    <body>
+    <body ng-app="mainApp" ng-controller="viewCandidateDetailsController">
         <div class="container">
             <div class="page-header">
                 <h1>View Candidate Details</h1>
@@ -34,7 +34,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">View Candidate Details</h3>
                 </div>
-                <div class="panel-body" ng-app="mainApp" ng-controller="viewCandidateDetailsController">
+                <div class="panel-body" >
                     <table class="table table-hover table-bordered" >
                       	<thead>
                       	<tr>	
@@ -53,7 +53,7 @@
 							</tr>
 							<tr>
 								<td>Phone</td>
-								<td>{{candidate.phone}}</td>
+								<td>{{candidate.phonenumber}}</td>
 							</tr>
 							<tr>
 								<td>Status</td>
@@ -61,26 +61,50 @@
 							</tr>
 							<tr>
 								<td>File</td>
-								<td><object data="downloadFile/{{candidate.filename}}" type="application/pdf"><a href="downloadFile/{{candidate.filename}}">click here to download the file.</a></object>
-								</td>
+								<td><a href="downloadFile/{{candidate.filename}}">click here to download the file.</a></td>
 							</tr>								
 						<tbody>
 					</table>					
-					<div ng-if="0 == candidate.rountcount">
-					<form action="scheduleInterview" method="get">
-						<div class="form-group">
-							<label> Employee EmailID </label> <input type="text" class="form-control"
-								id="emailid" placeholder="emailid" name="emailid">
-						</div>
-						<input type="hidden" name="analysticskey" value="{{candidate.analysticskey}}"> 
-						<div class="form-group">
-							<button type="submit" class="btn btn-success">Schedule First Round</button>
-							<button type="submit" class="btn btn-danger">Clear</button>
-						</div>
-					</form>
-					</div>
 					<div ng-if="0 != candidate.rountcount">
-					
+						<form action="scheduleInterview" method="get">
+							<div class="form-group">
+								<label> Employee EmailID </label> <input type="text" class="form-control"
+									id="emailid" placeholder="emailid" name="emailid">
+							</div>
+							<input type="hidden" name="analysticskey" value="{{candidate.analysticskey}}"> 
+							<div class="form-group">
+								<button type="submit" class="btn btn-success">Schedule First Round</button>
+								<button type="submit" class="btn btn-danger">Clear</button>
+							</div>
+						</form>
+					</div>
+					<div ng-if="0 == candidate.rountcount">
+						<table class="table table-hover table-bordered">
+                            			<thead>
+                                		<tr>	
+                                    		<th>#</th>
+                                    		<th>Analytics</th>                                    		
+                                    		<th>Attitude</th>
+                                    		<th>Coding</th>
+                                    		<th>Problem Solving</th>
+                                    		<th>Status</th>
+                                    		<th>Interviewer Comment</th> 
+                                    		<th>Recruiter Comment</th>                                    
+                                		</tr>
+                            			</thead>
+										<tbody>
+											<tr ng-repeat = "round in candidate.rounds">
+                                   	 			<th scope="row">{{round.index}}</th>
+                                    			<td>{{round.analytics}}</td>
+												<td>{{round.attitue}}</td>
+												<td>{{round.coding}}</td>
+												<td>{{round.problem}}</td>
+												<td>{{round.status}}</td>
+												<td>{{round.icomment}}</td>
+												<td>{{round.rcomment}}</td>
+                                			</tr>
+										<tbody>
+									</table>
     				</div> 
                 </div>
             </div>

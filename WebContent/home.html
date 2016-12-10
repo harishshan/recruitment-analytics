@@ -12,6 +12,37 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+        <style type="text/css">
+       .styled-select {
+   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+}
+
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 268px;
+}
+
+.styled-select.slate {
+   background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+   height: 34px;
+   width: 240px;
+}
+
+.styled-select.slate select {
+   border: 1px solid #ccc;
+   font-size: 16px;
+   height: 34px;
+   width: 268px;
+}
+        
+        </style>
         <script>
 	         var mainApp = angular.module("mainApp", []);
 	         
@@ -45,20 +76,22 @@
                     		<table>
                     			<tbody>
                     				<tr>
-                    					<td>                    						                   						
+                    					<td>
+                    						<div class="styled-select slate">  											   						                   						
 	                    					<select ng-model="filter">
 	                    						<option value="qualification">Qualification</option>
 	                    						<option value="skillset">Skillset</option>
 	                    						<option value="designation">Designation</option>
 	                    						<option value="company">company</option>
 	                    						<option value="status">Status</option>
+	                    						<option value="education">Education</option>
 	                    					</select>
-	                    				</td>	                    				                  				
-                    					<td>
-                    						&#160;&#160;&#160;&#160;&#160;<input type="text" class="form-control" id="filtervalue" placeholder="" name="filtervalue" ng-model = "filtervalue">
+	                    					</div>
+	                    				</td>
+	                    				<td><input type="text" class="form-control" id="filtervalue" placeholder="" name="filtervalue" ng-model = "filtervalue">
                     					</td>   
                     					<td>
-                    						<button ng-click = "search()">Search</button>	
+                    						&#160;&#160;&#160;<button ng-click = "search()" class="btn btn-success">Search</button>	
                     					</td>        					
                     				</tr>
                     			</tbody>

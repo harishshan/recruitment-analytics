@@ -46,3 +46,14 @@ CREATE TABLE [dbo].[Property](
 )ON [PRIMARY]);
 INSERT INTO [dbo].[Property]([name], [value]) VALUES ('nativeStoreLocation','C:/data');
 INSERT INTO [dbo].[Property]([name], [value]) VALUES ('nativeStoreLocation1','C:/data');
+
+create table round (z
+[Id] [int] IDENTITY(1,1) NOT NULL,
+round int,
+score int,
+feedback varchar(1024),
+employee varchar(1024),
+CONSTRAINT [PK_round] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)ON [PRIMARY]);
