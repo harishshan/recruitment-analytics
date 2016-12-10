@@ -22,6 +22,8 @@ public class DocumentTO implements Serializable {
 
     private String content;
 
+    private String phoneNumber;
+
     public String getAnalyticsKey() {
         return analyticsKey;
     }
@@ -86,5 +88,13 @@ public class DocumentTO implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
