@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -19,6 +20,7 @@ import org.apache.tika.exception.TikaException;
 import org.xml.sax.SAXException;
 
 import com.winterhack.altimetrik.to.DocumentTO;
+import com.winterhack.altimetrik.to.RoundTO;
 
 public class SolrDocumentManager {
 
@@ -46,9 +48,39 @@ public class SolrDocumentManager {
             documentTO.setName(String.valueOf(document.getFieldValue("name")));
             documentTO.setStatus(String.valueOf(document.getFieldValue("status")));
             documentTO.setPhoneNumber(String.valueOf(document.getFieldValue("phoneNumber")));
+            if (!(documentTO.getStatus().equalsIgnoreCase("new") || documentTO.getStatus().equalsIgnoreCase("[new]"))) {
+                String value = null;
+                List<RoundTO> roundTOs = new ArrayList<RoundTO>();
+                for (int i = 1; i <= 10; i++) {
+                    try {
+                        value = String.valueOf(document.getFieldValue("Round" + i));
+                        if (value != null) {
+                            String[] reviews = StringUtils.split(value, "@_@");
+                            RoundTO roundTO = new RoundTO();
+                            roundTO.setAnalyticalSkill(reviews[0]);
+                            roundTO.setAttitude(reviews[1]);
+                            roundTO.setCodingSkill(reviews[2]);
+                            roundTO.setProblemSolvingSkill(reviews[3]);
+                            roundTO.setRoundStatus(reviews[4]);
+                            roundTO.setInterviewerComment(reviews[5]);
+                            roundTO.setRecruterComment(reviews[6]);
+                            roundTOs.add(roundTO);
+                        } else {
+                            break;
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+                documentTO.setRoundTO(roundTOs);
+            }
             documentTOs.add(documentTO);
         }
         return documentTOs;
+    }
+
+    public static void main(String[] args) throws Exception {
+        SolrDocumentManager documentManager = new SolrDocumentManager();
+        documentManager.getDataFromSolr();
     }
 
     public void index(String emailId, String fileLocation)

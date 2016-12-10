@@ -38,9 +38,9 @@ public class MainClass {
         SolrClient solr = new HttpSolrClient.Builder("http://localhost:8983/solr/recrutement").build();
         SolrInputDocument document = new SolrInputDocument();
         document.addField("analyticsKey", "1");
-        document.addField("emailId", "albankumar1@gmail.com");
-        document.addField("name", "AlbanM");
-        document.addField("fileName", "AlbanM[9_0]1.doc");
+        document.addField("emailId", "ashokramcse@gmail.com");
+        document.addField("name", "Ashok Ram. G");
+        document.addField("fileName", "Ashok Ram(Resume).pdf");
         document.addField("status", "new");
 
         SolrInputDocument document1 = new SolrInputDocument();

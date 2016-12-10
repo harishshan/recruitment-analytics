@@ -14,6 +14,8 @@ public class RoundTO implements Serializable {
 
     private String problemSolvingSkill;
 
+    private String roundStatus;
+
     private String interviewerComment;
 
     private String recruterComment;
@@ -66,4 +68,11 @@ public class RoundTO implements Serializable {
         this.recruterComment = recruterComment;
     }
 
+    public String getRoundStatus() {
+        return roundStatus;
+    }
+
+    public void setRoundStatus(String roundStatus) {
+        this.roundStatus = roundStatus;
+    }
 }
