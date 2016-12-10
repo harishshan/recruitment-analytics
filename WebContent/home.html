@@ -5,12 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <title>Home</title>
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
-		<script>
+        <script>
 	         var mainApp = angular.module("mainApp", []);
 	         
 	         mainApp.controller('ViewDocumentsController', function($scope, $http) {
@@ -70,8 +72,10 @@
                                		<th>#</th>
                                		<th>Name</th>                                    		
                                		<th>EmailId</th>
+                               		<th>PhoneNumber</th>
                                		<th>Status</th>
-                               		<th>Download File</th>                                    
+                               		<th>Download File</th>
+                               		<th>View Details</th>                                    
                             	</tr>
                             	</thead>
 								<tbody>
@@ -79,8 +83,10 @@
                             			<th scope="row">{{docum.index}}</th>
                             			<td>{{docum.name}}</td>
 										<td>{{docum.emailid}}</td>
+										<td>{{docum.phonenumber}}</td>
 										<td>{{docum.status}}</td>
 										<td><a href="downloadFile/{{docum.filename}}">Click Here</a></td>
+										<td><a href="viewCandidateDetails.jsp?analysticskey={{docum.analysticskey}}">Click Here</a></td>
                             		</tr>
 								<tbody>
 							</table>
@@ -88,6 +94,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </body>
+        </div>       
+</body>
 </html>

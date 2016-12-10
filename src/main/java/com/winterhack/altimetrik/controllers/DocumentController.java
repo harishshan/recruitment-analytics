@@ -56,6 +56,8 @@ public class DocumentController {
                 jsonObject.addProperty("index", i++);
                 jsonObject.addProperty("name", StringUtil.removeBracket(document.getName()));
                 jsonObject.addProperty("emailid", StringUtil.removeBracket(document.getEmailId()));
+                jsonObject.addProperty("phonenumber", StringUtil.removeBracket(document.getPhoneNumber()));
+                jsonObject.addProperty("analysticskey", StringUtil.removeBracket(document.getAnalyticsKey()));
                 if(document.getFileName().startsWith(nativeStoreLocation)){                	
                 	String filename = StringUtil.removeBracket(document.getFileName()).substring(nativeStoreLocation.length());                	
                 	jsonObject.addProperty("filename", cryptUtil.encrypt(filename));
@@ -118,6 +120,8 @@ public class DocumentController {
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("index", i++);
                 jsonObject.addProperty("name", StringUtil.removeBracket(document.getName()));
+                jsonObject.addProperty("analysticskey", StringUtil.removeBracket(document.getAnalyticsKey()));
+                jsonObject.addProperty("phonenumber", StringUtil.removeBracket(document.getPhoneNumber()));
                 jsonObject.addProperty("emailid", StringUtil.removeBracket(document.getEmailId()));
                 if(document.getFileName().startsWith(nativeStoreLocation)){                	
                 	String filename = StringUtil.removeBracket(document.getFileName()).substring(nativeStoreLocation.length());                	
@@ -136,6 +140,38 @@ public class DocumentController {
             return new JsonArray();
         }
         
+    }
+    
+    @RequestMapping(value = "/getCandidateDetails/{analysticskey}", method = RequestMethod.GET)
+    public @ResponseBody JsonObject getCandidateDetails(@PathVariable("analysticskey") String analysticsKey, HttpServletRequest request, HttpServletResponse response,HttpSession session) {
+        try {
+        	String filter = request.getParameter("filter") != null ? request.getParameter("filter") : "";
+            String filtervalue = request.getParameter("filtervalue") != null ? request.getParameter("filtervalue") : "";
+            List<DocumentTO> documentTOList = solrDocumentManager.getDataFromSolr(); 
+        	String nativeStoreLocation = propertyDAO.getNativeStoreLocation();
+            int i = 0;
+            JsonObject jsonObject = new JsonObject();
+            for(DocumentTO document: documentTOList){
+                jsonObject.addProperty("name", StringUtil.removeBracket(document.getName()));
+                jsonObject.addProperty("analysticskey", StringUtil.removeBracket(document.getAnalyticsKey()));
+                jsonObject.addProperty("phonenumber", StringUtil.removeBracket(document.getPhoneNumber()));
+                jsonObject.addProperty("emailid", StringUtil.removeBracket(document.getEmailId()));
+                if(document.getFileName().startsWith(nativeStoreLocation)){                	
+                	String filename = StringUtil.removeBracket(document.getFileName()).substring(nativeStoreLocation.length());                	
+                	jsonObject.addProperty("filename", cryptUtil.encrypt(filename));
+                }else{
+                	String filename = StringUtil.removeBracket(document.getFileName());                	
+                	jsonObject.addProperty("filename", cryptUtil.encrypt(filename));
+                }
+                jsonObject.addProperty("status", StringUtil.removeBracket(document.getStatus()));
+                
+            }
+            return jsonObject;
+        } 
+        catch (Exception ex) {
+        	logger.error(ex.toString(), ex);
+            return new JsonObject();
+        }        
     }
 
 	public PropertyDAO getPropertyDAO() {
