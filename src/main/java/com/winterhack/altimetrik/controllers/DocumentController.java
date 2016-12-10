@@ -25,6 +25,7 @@ import com.winterhack.altimetrik.dao.PropertyDAO;
 import com.winterhack.altimetrik.manager.SolrDocumentManager;
 import com.winterhack.altimetrik.to.DocumentTO;
 import com.winterhack.altimetrik.util.CryptUtil;
+import com.winterhack.altimetrik.util.MailUtil;
 import com.winterhack.altimetrik.util.StringUtil;
 
 
@@ -39,6 +40,9 @@ public class DocumentController {
 	
 	@Autowired
 	private SolrDocumentManager solrDocumentManager;
+	
+	@Autowired
+	private MailUtil mailUtil;
    
     private final Logger logger = LoggerFactory.getLogger(DocumentController.class);
 
@@ -159,6 +163,7 @@ public class DocumentController {
                 	jsonObject.addProperty("filename", cryptUtil.encrypt(filename));
                 }
                 jsonObject.addProperty("status", StringUtil.removeBracket(document.getStatus()));
+                jsonObject.addProperty("rountcount", "0");
                 
             }
             return jsonObject;
@@ -166,6 +171,20 @@ public class DocumentController {
         catch (Exception ex) {
         	logger.error(ex.toString(), ex);
             return new JsonObject();
+        }        
+    }
+    @RequestMapping(value = "/scheduleInterview", method = RequestMethod.GET)
+    public String scheduleInterview(HttpServletRequest request, HttpServletResponse response,HttpSession session) {
+        try {
+        	String emailid = request.getParameter("emailid") != null ? request.getParameter("emailid") : "";
+        	String analysticskey = request.getParameter("analysticskey") != null ? request.getParameter("analysticskey") : "";
+        	String msg = "Interveiw Link: http://localhost:8080/recruitmentanalytics/interview?analysticskey"+cryptUtil.encrypt(analysticskey);
+        	mailUtil.sendMail("altirecrute@gmail.com", emailid, "Inverview Link", msg);
+        	return "scheduledSuccessfully";
+        } 
+        catch (Exception ex) {
+        	logger.error(ex.toString(), ex);
+            return "failed";
         }        
     }
 
@@ -191,5 +210,14 @@ public class DocumentController {
 
 	public void setSolrDocumentManager(SolrDocumentManager solrDocumentManager) {
 		this.solrDocumentManager = solrDocumentManager;
+	}
+
+	public MailUtil getMailUtil() {
+		return mailUtil;
+	}
+
+	public void setMailUtil(MailUtil mailUtil) {
+		this.mailUtil = mailUtil;
 	}    
+	
 }

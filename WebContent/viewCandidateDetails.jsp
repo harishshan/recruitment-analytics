@@ -61,12 +61,27 @@
 							</tr>
 							<tr>
 								<td>File</td>
-								<td><object data="downloadFile/{{candidate.filename}}" type="application/pdf"><a href="filename.pdf">click here to download the file.</a></object>
-</td>
+								<td><object data="downloadFile/{{candidate.filename}}" type="application/pdf"><a href="downloadFile/{{candidate.filename}}">click here to download the file.</a></object>
+								</td>
 							</tr>								
 						<tbody>
 					</table>					
-					   
+					<div ng-if="0 == candidate.rountcount">
+					<form action="scheduleInterview" method="get">
+						<div class="form-group">
+							<label> Employee EmailID </label> <input type="text" class="form-control"
+								id="emailid" placeholder="emailid" name="emailid">
+						</div>
+						<input type="hidden" name="analysticskey" value="{{candidate.analysticskey}}"> 
+						<div class="form-group">
+							<button type="submit" class="btn btn-success">Schedule First Round</button>
+							<button type="submit" class="btn btn-danger">Clear</button>
+						</div>
+					</form>
+					</div>
+					<div ng-if="0 != candidate.rountcount">
+					
+    				</div> 
                 </div>
             </div>
         </div>

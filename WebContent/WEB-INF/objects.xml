@@ -20,4 +20,19 @@
 	<bean id="solrDocumentManager" class="com.winterhack.altimetrik.manager.SolrDocumentManager">
 		<constructor-arg value="${solr.hostname}"/>
 	</bean>
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="altirecrute@gmail.com" />
+		<property name="password" value="Alti@1234" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="mailUtil" class="com.winterhack.altimetrik.util.MailUtil">
+		<property name="mailSender" ref="mailSender" />
+	</bean>
 </beans>
