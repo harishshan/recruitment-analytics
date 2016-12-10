@@ -52,11 +52,6 @@ public class SolrDocumentManager {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        SolrDocumentManager documentManager = new SolrDocumentManager();
-        documentManager.getDataFromSolrUsingAnalyticsKey("3");
-    }
-
     public List<DocumentTO> getDataFromSolrViaSearch(String field, String queryString)
             throws SolrServerException, IOException {
         List<DocumentTO> documentTOs = new ArrayList<DocumentTO>();
