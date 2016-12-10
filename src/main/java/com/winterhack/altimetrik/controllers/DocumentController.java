@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +82,6 @@ public class DocumentController {
         	String fullPath = nativeStoreLocation + File.separatorChar +decryptedFileName;
         	File file = new File(fullPath);
         	String filename = file.getName();
-        	String extention = FilenameUtils.getExtension(filename);
 
         	FileInputStream fileInputStream = (FileInputStream) new FileInputStream(file);
     		response.setContentType("text/html");
@@ -112,7 +110,7 @@ public class DocumentController {
         try {
         	String filter = request.getParameter("filter") != null ? request.getParameter("filter") : "";
             String filtervalue = request.getParameter("filtervalue") != null ? request.getParameter("filtervalue") : "";
-            List<DocumentTO> documentTOList = solrDocumentManager.getDataFromSolr(); 
+            List<DocumentTO> documentTOList = solrDocumentManager.getDataFromSolrUsingSearch(filter, filtervalue); 
         	String nativeStoreLocation = propertyDAO.getNativeStoreLocation();
             JsonArray jsonArray = new JsonArray();
             int i = 0;
@@ -145,11 +143,8 @@ public class DocumentController {
     @RequestMapping(value = "/getCandidateDetails/{analysticskey}", method = RequestMethod.GET)
     public @ResponseBody JsonObject getCandidateDetails(@PathVariable("analysticskey") String analysticsKey, HttpServletRequest request, HttpServletResponse response,HttpSession session) {
         try {
-        	String filter = request.getParameter("filter") != null ? request.getParameter("filter") : "";
-            String filtervalue = request.getParameter("filtervalue") != null ? request.getParameter("filtervalue") : "";
-            List<DocumentTO> documentTOList = solrDocumentManager.getDataFromSolr(); 
+            List<DocumentTO> documentTOList = solrDocumentManager.getDataFromSolrUsingAnalyticsKey(analysticsKey); 
         	String nativeStoreLocation = propertyDAO.getNativeStoreLocation();
-            int i = 0;
             JsonObject jsonObject = new JsonObject();
             for(DocumentTO document: documentTOList){
                 jsonObject.addProperty("name", StringUtil.removeBracket(document.getName()));
