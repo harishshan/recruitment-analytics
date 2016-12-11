@@ -46,28 +46,28 @@ public class RoundDAO {
         }
     }
 
-        
     public String getNativeStoreLocation() {
-        Session session = null;            
+        Session session = null;
         try {
-        	logger.info("PropertyDAO getNativeStoreLocation method");
+            logger.info("PropertyDAO getNativeStoreLocation method");
             session = this.sessionFactory.openSession();
             Criteria criteria = session.createCriteria(Property.class, "property");
             criteria.add(Restrictions.eq("name", CommonConstants.NATIVE_STORE_LOCATION));
             List<Property> propertiesList = criteria.list();
-            if(propertiesList.size() > 0){
-            	return propertiesList.get(0).getValue();
+            if (propertiesList.size() > 0) {
+                return propertiesList.get(0).getValue();
             }
-            return "";                
+            return "";
         } catch (Exception ex) {
-            logger.error(ex.toString(), ex);    
+            logger.error(ex.toString(), ex);
             return "";
         } finally {
-        	if (session != null && (session.isConnected() || session.isOpen())) {
+            if (session != null && (session.isConnected() || session.isOpen())) {
                 session.close();
-            }            	
+            }
         }
     }
+
     public void save(Round round) throws UserAlreadyExistsException {
         Session session = null;
         Transaction tx = null;
@@ -77,8 +77,7 @@ public class RoundDAO {
             tx = session.beginTransaction();
             session.save(round);
             tx.commit();
-        }
-         catch (Exception ex) {
+        } catch (Exception ex) {
             logger.error(ex.toString(), ex);
             if (session != null && (session.isConnected() || session.isOpen()) && tx != null) {
                 tx.rollback();
